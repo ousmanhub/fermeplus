@@ -91,6 +91,95 @@ class IrrigationPlan(BaseModel):
     suggested_duration_minutes: int
 
 
+class CalendarEventBase(BaseModel):
+    title: str
+    event_type: str
+    parcelle_id: str
+    event_date: datetime
+    status: str = "planifié"
+    notes: Optional[str] = None
+
+
+class CalendarEventCreate(CalendarEventBase):
+    pass
+
+
+class CalendarEventResponse(CalendarEventBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class StockItemBase(BaseModel):
+    name: str
+    category: str
+    quantity: float
+    unit: str
+    parcelle_id: Optional[str] = None
+    cost_per_unit: Optional[float] = None
+    supplier: Optional[str] = None
+    notes: Optional[str] = None
+
+
+class StockItemCreate(StockItemBase):
+    pass
+
+
+class StockItemResponse(StockItemBase):
+    id: int
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class ActivityLogItem(BaseModel):
+    id: int
+    action: str
+    entity_type: str
+    entity_id: Optional[int]
+    parcelle_id: Optional[str]
+    details: Optional[str]
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class ChatRequest(BaseModel):
+    message: str
+    session_id: str = "default"
+
+
+class ChatResponse(BaseModel):
+    reply: str
+
+
+class ParcelBase(BaseModel):
+    name: str
+    parcelle_id: str
+    lat: float
+    lng: float
+    area_ha: Optional[float] = None
+    crop: Optional[str] = None
+    soil_status: str = "ok"
+    notes: Optional[str] = None
+
+
+class ParcelCreate(ParcelBase):
+    pass
+
+
+class ParcelResponse(ParcelBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
 class IoTSensorBase(BaseModel):
     sensor_id: str
     parcelle_id: str

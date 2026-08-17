@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
-from app.routers import soil, diseases, weather, iot, reports, alerts, irrigation
+from app.routers import soil, diseases, weather, iot, reports, alerts, irrigation, calendar, stock, activity, chat, parcels
 
 Base.metadata.create_all(bind=engine)
 
@@ -26,6 +26,11 @@ app.include_router(iot.router)
 app.include_router(reports.router)
 app.include_router(alerts.router)
 app.include_router(irrigation.router)
+app.include_router(calendar.router)
+app.include_router(stock.router)
+app.include_router(activity.router)
+app.include_router(chat.router)
+app.include_router(parcels.router)
 
 
 @app.get("/")
