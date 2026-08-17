@@ -1,0 +1,33 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.database import engine, Base
+from app.routers import soil, diseases, weather, iot, reports, alerts, irrigation
+
+Base.metadata.create_all(bind=engine)
+
+app = FastAPI(
+    title="Ferme+",
+    description="Plateforme agriculture connectée",
+    version="0.1.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(soil.router)
+app.include_router(diseases.router)
+app.include_router(weather.router)
+app.include_router(iot.router)
+app.include_router(reports.router)
+app.include_router(alerts.router)
+app.include_router(irrigation.router)
+
+
+@app.get("/")
+def root():
+    return {"message": "Ferme+ API", "version": "0.1.0"}
