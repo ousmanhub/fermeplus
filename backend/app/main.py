@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
 from app.routers import soil, diseases, weather, iot, reports, alerts, irrigation, calendar, stock, activity, chat, parcels
+import os
 
 Base.metadata.create_all(bind=engine)
 
@@ -11,9 +12,11 @@ app = FastAPI(
     version="0.1.0",
 )
 
+allowed_origins = os.getenv("FERMEPLUS_CORS_ORIGINS", "*").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

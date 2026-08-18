@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    environment:
+      - FERMEPLUS_DATABASE_URL=sqlite:///./data/fermeplus.db
+      - FERMEPLUS_CORS_ORIGINS=https://fermeplus.smartstacks.dev
+    volumes:
+      - sqlite_data:/app/data
+    networks:
+      - dokploy-network
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true
+
+volumes:
+  sqlite_data:
