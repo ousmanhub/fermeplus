@@ -1,37 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Sprout, Loader2 } from 'lucide-react'
 import { Button } from '../components/ui/Button'
+import { useAuth } from '../lib/auth'
 
 export default function LoginPage() {
+  const { login } = useAuth()
   const [email, setEmail] = useState('admin@smartstacks.dev')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [login, setLoginFn] = useState(null)
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    import('../lib/auth').then(({ useAuth }) => {
-      const auth = useAuth()
-      setLoginFn(() => auth.login)
-      setUser(auth.user)
-    })
-  }, [])
-
-  useEffect(() => {
-    if (user) {
-      window.location.replace('/')
-    }
-  }, [user])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!login) return
     setError('')
     setLoading(true)
     try {
       await login(email, password)
-      window.location.replace('/')
     } catch (err) {
       setError(err.message || 'Erreur de connexion')
     } finally {
@@ -50,7 +34,7 @@ export default function LoginPage() {
           <p className="text-sm text-gray-500">Connexion sécurisée</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
           <div className="space-y-1">
             <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
             <input
