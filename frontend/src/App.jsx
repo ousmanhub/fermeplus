@@ -1,5 +1,7 @@
-import { useState } from 'react'
-import { Leaf, Bug, CloudRain, Wifi, Sprout, LayoutDashboard, Bell, Droplets, Calendar, Package, MessageSquare, History, MapPin, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Leaf, Bug, CloudRain, Wifi, Sprout, LayoutDashboard, Bell, Droplets, Calendar, Package, MessageSquare, History, MapPin, ChevronLeft, ChevronRight, LogOut } from 'lucide-react'
+import LoginPage from './pages/LoginPage.jsx'
+import { useAuth } from './lib/auth.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
 import SoilPage from './pages/SoilPage.jsx'
 import DiseasePage from './pages/DiseasePage.jsx'
@@ -31,8 +33,18 @@ const tabs = [
 ]
 
 function App() {
+  const { user, loading, logout } = useAuth()
   const [active, setActive] = useState('dashboard')
   const [collapsed, setCollapsed] = useState(false)
+
+  useEffect(() => {
+    if (!loading && !user) {
+      // déjà géré par le render conditionnel
+    }
+  }, [user, loading])
+
+  if (loading) return null
+  if (!user) return <LoginPage />
 
   const grouped = tabs.reduce((acc, tab) => {
     if (!acc[tab.group]) acc[tab.group] = []
@@ -83,13 +95,23 @@ function App() {
           ))}
         </nav>
 
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="m-3 p-2 border rounded-lg hover:bg-gray-50 flex items-center justify-center text-gray-500"
-          title={collapsed ? 'Étendre' : 'Réduire'}
-        >
-          {collapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
-        </button>
+        <div className="p-3 border-t">
+          <button
+            onClick={logout}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition"
+            title={collapsed ? 'Déconnexion' : ''}
+          >
+            <LogOut className="w-5 h-5 shrink-0" />
+            {!collapsed && <span>Déconnexion</span>}
+          </button>
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="mt-2 w-full p-2 border rounded-lg hover:bg-gray-50 flex items-center justify-center text-gray-500"
+            title={collapsed ? 'Étendre' : 'Réduire'}
+          >
+            {collapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
+          </button>
+        </div>
       </aside>
 
       <main className="flex-1 min-w-0 p-4 md:p-6 overflow-y-auto">
