@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  fermeplus-backend:
+    build: ./backend
+    container_name: fermeplus-backend
+    environment:
+      - FERMEPLUS_DATABASE_URL=sqlite:///./data/fermeplus.db
+      - FERMEPLUS_CORS_ORIGINS=https://fermeplus.smartstacks.dev,http://localhost:8080,http://localhost:3000
+    volumes:
+      - fermeplus_data:/app/data
+    restart: unless-stopped
+    networks:
+      - fermeplus-network
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/')\""]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  fermeplus-frontend:
+    build: ./frontend
+    container_name: fermeplus-frontend
+    depends_on:
+      - fermeplus-backend
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - fermeplus-network
+
+networks:
+  fermeplus-network:
+    driver: bridge
+
+volumes:
+  fermeplus_data:
