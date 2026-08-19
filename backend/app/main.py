@@ -90,7 +90,7 @@ app.include_router(stock.router)
 app.include_router(activity.router)
 app.include_router(chat.router)
 app.include_router(parcels.router)
-app.include_router(analytics.router)
+app.include_router(analytics.router, prefix="/api/analytics")
 
 
 @app.get("/")
