@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { TrendingUp, AlertTriangle, Package, Sprout } from 'lucide-react'
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import Card from '../components/ui/Card'
+import { Card } from '../components/ui/Card'
 
 const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4']
 
