@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from app.database import get_db
 from app import models
 
-router = APIRouter(prefix="/analytics", tags=["analytics"])
+router = APIRouter(tags=["analytics"])
 
 
 @router.get("/soil-trends")
