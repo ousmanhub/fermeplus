@@ -30,7 +30,7 @@ app.add_middleware(
 ADMIN_EMAIL = os.getenv("FERMEPLUS_ADMIN_EMAIL", "admin@smartstacks.dev")
 ADMIN_PASSWORD_HASH = os.getenv(
     "FERMEPLUS_ADMIN_PASSWORD_HASH",
-    "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"  # admin
+    "dfc40f5cac5f086cccbeaf64a6cf57bbb3e6d72ce649010f6e4aba1fcc44fb49"  # Yx31EA9AQ1vtYB7J
 )
 sessions = {}
 
