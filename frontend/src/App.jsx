@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Leaf, Bug, CloudRain, Wifi, Sprout, LayoutDashboard, Bell, Droplets, Calendar, Package, MessageSquare, History, MapPin, ChevronLeft, ChevronRight, LogOut } from 'lucide-react'
+import { Leaf, Bug, CloudRain, Wifi, Sprout, LayoutDashboard, Bell, Droplets, Calendar, Package, MessageSquare, History, MapPin, ChevronLeft, ChevronRight, LogOut, TrendingUp } from 'lucide-react'
 import LoginPage from './pages/LoginPage.jsx'
 import { useAuth } from './lib/auth.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
@@ -15,10 +15,12 @@ import StockPage from './pages/StockPage.jsx'
 import ChatPage from './pages/ChatPage.jsx'
 import ActivityPage from './pages/ActivityPage.jsx'
 import MapPage from './pages/MapPage.jsx'
+import AnalyticsPage from './pages/AnalyticsPage.jsx'
 
 const tabs = [
   { id: 'dashboard', label: 'Tableau de bord', icon: LayoutDashboard, color: 'text-gray-700', group: 'Vue d\'ensemble' },
   { id: 'map', label: 'Carte des parcelles', icon: MapPin, color: 'text-emerald-600', group: 'Vue d\'ensemble' },
+  { id: 'analytics', label: 'Analyses', icon: TrendingUp, color: 'text-indigo-600', group: 'Vue d\'ensemble' },
   { id: 'soil', label: 'Sols', icon: Leaf, color: 'text-green-600', group: 'Terrain' },
   { id: 'disease', label: 'Maladies', icon: Bug, color: 'text-red-600', group: 'Terrain' },
   { id: 'iot', label: 'Capteurs IoT', icon: Wifi, color: 'text-purple-600', group: 'Terrain' },
@@ -123,6 +125,7 @@ function App() {
 
           {active === 'dashboard' && <DashboardPage onTabChange={setActive} />}
           {active === 'map' && <MapPage />}
+          {active === 'analytics' && <AnalyticsPage />}
           {active === 'soil' && <SoilPage />}
           {active === 'disease' && <DiseasePage />}
           {active === 'weather' && <WeatherPage />}

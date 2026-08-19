@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from app.database import engine, Base
-from app.routers import soil, diseases, weather, iot, reports, alerts, irrigation, calendar, stock, activity, chat, parcels
+from app.routers import soil, diseases, weather, iot, reports, alerts, irrigation, calendar, stock, activity, chat, parcels, analytics
 import os
 import hashlib
 import secrets
@@ -90,6 +90,7 @@ app.include_router(stock.router)
 app.include_router(activity.router)
 app.include_router(chat.router)
 app.include_router(parcels.router)
+app.include_router(analytics.router)
 
 
 @app.get("/")
