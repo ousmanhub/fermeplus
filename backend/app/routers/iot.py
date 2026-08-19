@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from app.database import get_db
 from app import models, schemas
 
-router = APIRouter(prefix="/iot", tags=["iot"])
+router = APIRouter(tags=["iot"])
 
 
 @router.post("/", response_model=schemas.IoTSensorResponse)

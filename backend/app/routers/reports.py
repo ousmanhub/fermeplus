@@ -12,7 +12,7 @@ from reportlab.lib import colors
 from app.database import get_db
 from app import models
 
-router = APIRouter(prefix="/reports", tags=["reports"])
+router = APIRouter(tags=["reports"])
 
 
 @router.get("/pdf")

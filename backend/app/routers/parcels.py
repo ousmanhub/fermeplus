@@ -5,7 +5,7 @@ from app.database import get_db
 from app import models, schemas
 from app.utils.activity import log_activity
 
-router = APIRouter(prefix="/parcels", tags=["parcels"])
+router = APIRouter(tags=["parcels"])
 
 
 @router.post("/", response_model=schemas.ParcelResponse)

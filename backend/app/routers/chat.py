@@ -3,7 +3,7 @@ from app import schemas
 import httpx
 import os
 
-router = APIRouter(prefix="/chat", tags=["chat"])
+router = APIRouter(tags=["chat"])
 
 SYSTEM_PROMPT = """Tu es un assistant agricole pour Ferme+, une application d'agriculture connectée au Tchad/Sahel.
 Réponds en français, de manière concise et pratique.

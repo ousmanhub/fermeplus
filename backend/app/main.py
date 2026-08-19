@@ -78,18 +78,18 @@ async def auth_logout(request: Request):
 
 # ─── Routers ────────────────────────────────────────────────────────────────
 
-app.include_router(soil.router)
-app.include_router(diseases.router)
-app.include_router(weather.router)
-app.include_router(iot.router)
-app.include_router(reports.router)
-app.include_router(alerts.router)
-app.include_router(irrigation.router)
-app.include_router(calendar.router)
-app.include_router(stock.router)
-app.include_router(activity.router)
-app.include_router(chat.router)
-app.include_router(parcels.router)
+app.include_router(soil.router, prefix="/api/soil")
+app.include_router(diseases.router, prefix="/api/diseases")
+app.include_router(weather.router, prefix="/api/weather")
+app.include_router(iot.router, prefix="/api/iot")
+app.include_router(reports.router, prefix="/api/reports")
+app.include_router(alerts.router, prefix="/api/alerts")
+app.include_router(irrigation.router, prefix="/api/irrigation")
+app.include_router(calendar.router, prefix="/api/calendar")
+app.include_router(stock.router, prefix="/api/stock")
+app.include_router(activity.router, prefix="/api/activity")
+app.include_router(chat.router, prefix="/api/chat")
+app.include_router(parcels.router, prefix="/api/parcels")
 app.include_router(analytics.router, prefix="/api/analytics")
 
 

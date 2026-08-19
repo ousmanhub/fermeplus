@@ -7,7 +7,7 @@ import httpx
 import os
 import random
 
-router = APIRouter(prefix="/weather", tags=["weather"])
+router = APIRouter(tags=["weather"])
 
 
 @router.post("/", response_model=schemas.WeatherDataResponse)

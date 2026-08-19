@@ -4,7 +4,7 @@ from typing import List, Optional
 from app.database import get_db
 from app import models, schemas
 
-router = APIRouter(prefix="/activity", tags=["activity"])
+router = APIRouter(tags=["activity"])
 
 
 @router.get("/", response_model=List[schemas.ActivityLogItem])

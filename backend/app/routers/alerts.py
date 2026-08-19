@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from app.database import get_db
 from app import models, schemas
 
-router = APIRouter(prefix="/alerts", tags=["alerts"])
+router = APIRouter(tags=["alerts"])
 
 
 @router.get("/", response_model=List[schemas.AlertItem])

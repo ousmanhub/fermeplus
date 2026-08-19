@@ -4,7 +4,7 @@ from typing import List
 from app.database import get_db
 from app import models, schemas
 
-router = APIRouter(prefix="/diseases", tags=["diseases"])
+router = APIRouter(tags=["diseases"])
 
 
 @router.post("/", response_model=schemas.DiseaseDetectionResponse)

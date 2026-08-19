@@ -8,7 +8,7 @@ from app import models, schemas
 import httpx
 import os
 
-router = APIRouter(prefix="/irrigation", tags=["irrigation"])
+router = APIRouter(tags=["irrigation"])
 
 
 def get_latest_sensor(db: Session, parcelle_id: str, sensor_type: str):

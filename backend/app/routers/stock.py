@@ -5,7 +5,7 @@ from app.database import get_db
 from app import models, schemas
 from app.utils.activity import log_activity
 
-router = APIRouter(prefix="/stock", tags=["stock"])
+router = APIRouter(tags=["stock"])
 
 
 @router.post("/", response_model=schemas.StockItemResponse)

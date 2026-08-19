@@ -4,7 +4,7 @@ from typing import List
 from app.database import get_db
 from app import models, schemas
 
-router = APIRouter(prefix="/soil", tags=["soil"])
+router = APIRouter(tags=["soil"])
 
 
 def generate_recommendation(ph: float, n: float, p: float, k: float, humidity: float) -> str:
