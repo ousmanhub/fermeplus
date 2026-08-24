@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Leaf, Bug, CloudRain, Wifi, Sprout, LayoutDashboard, Bell, Droplets, Calendar, Package, MessageSquare, History, MapPin, ChevronLeft, ChevronRight, LogOut, TrendingUp } from 'lucide-react'
+import { Leaf, Bug, CloudRain, Wifi, Sprout, LayoutDashboard, Bell, Droplets, Calendar, Package, MessageSquare, History, MapPin, ChevronLeft, ChevronRight, LogOut, TrendingUp, Radio } from 'lucide-react'
 import LoginPage from './pages/LoginPage.jsx'
 import { useAuth } from './lib/auth.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
@@ -16,6 +16,7 @@ import ChatPage from './pages/ChatPage.jsx'
 import ActivityPage from './pages/ActivityPage.jsx'
 import MapPage from './pages/MapPage.jsx'
 import AnalyticsPage from './pages/AnalyticsPage.jsx'
+import MeshPage from './pages/MeshPage.jsx'
 
 const tabs = [
   { id: 'dashboard', label: 'Tableau de bord', icon: LayoutDashboard, color: 'text-gray-700', group: 'Vue d\'ensemble' },
@@ -24,6 +25,7 @@ const tabs = [
   { id: 'soil', label: 'Sols', icon: Leaf, color: 'text-green-600', group: 'Terrain' },
   { id: 'disease', label: 'Maladies', icon: Bug, color: 'text-red-600', group: 'Terrain' },
   { id: 'iot', label: 'Capteurs IoT', icon: Wifi, color: 'text-purple-600', group: 'Terrain' },
+  { id: 'mesh', label: 'Mesh off-grid', icon: Radio, color: 'text-teal-600', group: 'Terrain' },
   { id: 'weather', label: 'Météo actuelle', icon: CloudRain, color: 'text-blue-600', group: 'Décisions' },
   { id: 'forecast', label: 'Prévisions 5 jours', icon: Calendar, color: 'text-indigo-600', group: 'Décisions' },
   { id: 'irrigation', label: 'Plan irrigation', icon: Droplets, color: 'text-cyan-600', group: 'Décisions' },
@@ -131,6 +133,7 @@ function App() {
           {active === 'weather' && <WeatherPage />}
           {active === 'forecast' && <ForecastPage />}
           {active === 'iot' && <IoTPage />}
+          {active === 'mesh' && <MeshPage />}
           {active === 'irrigation' && <IrrigationPage />}
           {active === 'alerts' && <AlertsPage />}
           {active === 'calendar' && <CalendarPage />}
