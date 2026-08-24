@@ -118,3 +118,49 @@ class Parcel(Base):
     soil_status = Column(String, default="ok")  # ok, dry, acid, disease
     notes = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+# ─── Meshtastic (off-grid mesh) ──────────────────────────────────────────────
+
+class MeshtasticNode(Base):
+    __tablename__ = "meshtastic_nodes"
+
+    id = Column(Integer, primary_key=True, index=True)
+    node_id = Column(String, unique=True, index=True)  # ex: !a1b2c3d4
+    name = Column(String, nullable=True)
+    role = Column(String, default="client")  # client, router, sensor
+    parcelle_id = Column(String, index=True, nullable=True)
+    last_seen = Column(DateTime(timezone=True), nullable=True)
+    battery_pct = Column(Float, nullable=True)
+    lat = Column(Float, nullable=True)
+    lon = Column(Float, nullable=True)
+    hops_away = Column(Integer, default=0)
+    snr = Column(Float, nullable=True)
+    rssi = Column(Float, nullable=True)
+
+
+class MeshtasticMessage(Base):
+    __tablename__ = "meshtastic_messages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    node_id = Column(String, index=True)
+    channel = Column(String, default="primary")
+    portnum = Column(String, default="text")  # text, telemetry, position
+    payload = Column(Text)  # JSON brut
+    from_hop_limit = Column(Integer, nullable=True)
+    rssi = Column(Float, nullable=True)
+    snr = Column(Float, nullable=True)
+    received_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class MeshtasticSensorReading(Base):
+    __tablename__ = "meshtastic_sensor_readings"
+
+    id = Column(Integer, primary_key=True, index=True)
+    sensor_id = Column(String, index=True)
+    node_id = Column(String, index=True)
+    parcelle_id = Column(String, index=True, nullable=True)
+    metric = Column(String, index=True)  # temperature, humidity, soil_moisture, battery...
+    value = Column(Float)
+    unit = Column(String)
+    timestamp = Column(DateTime(timezone=True), index=True)
